@@ -1,4 +1,4 @@
-package fi.juka.activityrecognitionlibrary
+package fi.juka.library
 
 import org.junit.Test
 
