@@ -138,12 +138,12 @@ class ActivityDao(private val dbHelper: TrainingDbHelper) {
         val trainingDataList = mutableListOf<TrainingData>()
         while (cursor.moveToNext()) {
             val id = cursor.getLong(cursor.getColumnIndexOrThrow(BaseColumns._ID))
-            val x_axis = cursor.getDouble(cursor.getColumnIndexOrThrow(trainingDataEntry.COLUMN_NAME_X_AXIS))
-            val y_axis = cursor.getDouble(cursor.getColumnIndexOrThrow(trainingDataEntry.COLUMN_NAME_Y_AXIS))
-            val z_axis = cursor.getDouble(cursor.getColumnIndexOrThrow(trainingDataEntry.COLUMN_NAME_Z_AXIS))
+            val x_axis = cursor.getFloat(cursor.getColumnIndexOrThrow(trainingDataEntry.COLUMN_NAME_X_AXIS))
+            val y_axis = cursor.getFloat(cursor.getColumnIndexOrThrow(trainingDataEntry.COLUMN_NAME_Y_AXIS))
+            val z_axis = cursor.getFloat(cursor.getColumnIndexOrThrow(trainingDataEntry.COLUMN_NAME_Z_AXIS))
             val timestamp = cursor.getLong(cursor.getColumnIndexOrThrow(trainingDataEntry.COLUMN_NAME_TIMESTAMP))
             val activityId = cursor.getLong(cursor.getColumnIndexOrThrow(trainingDataEntry.COLUMN_NAME_ACTIVITY_ID))
-            val total_acceleration = cursor.getDouble(cursor.getColumnIndexOrThrow(trainingDataEntry.COLUMN_NAME_TOTAL_ACCELERATION))
+            val total_acceleration = cursor.getFloat(cursor.getColumnIndexOrThrow(trainingDataEntry.COLUMN_NAME_TOTAL_ACCELERATION))
 
             val trainingData = TrainingData(id, x_axis, y_axis, z_axis, total_acceleration, timestamp, activityId)
             trainingDataList.add(trainingData)

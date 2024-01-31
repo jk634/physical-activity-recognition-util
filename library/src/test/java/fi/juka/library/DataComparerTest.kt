@@ -36,12 +36,12 @@ class DataComparerTest {
         val activityData = listOf(1L to "Activity1", 2L to "Activity2")
         val trainingData = mapOf(
             1L to listOf(
-                TrainingData(1, 1.2, 0.5, 0.6, 0.0,0,1),
-                TrainingData(2, 1.4, 0.6, 0.5,0.0,0,1)
+                TrainingData(1, 1.2F, 0.5F, 0.6F, 0.0F,0,1),
+                TrainingData(2, 1.4F, 0.6F, 0.5F,0.0F,0,1)
             ),
             2L to listOf(
-                TrainingData(1, 3.5, 2.1, 2.4,0.0,0,2),
-                TrainingData(2, 4.0, 2.3, 2.4,0.0,0,2)
+                TrainingData(1, 3.5F, 2.1F, 2.4F,0.0F,0,2),
+                TrainingData(2, 4.0F, 2.3F, 2.4F,0.0F,0,2)
             )
         )
 
@@ -68,12 +68,12 @@ class DataComparerTest {
         val activityData = listOf(1L to "Walking", 2L to "Running")
         val trainingData = mapOf(
             1L to listOf(
-                TrainingData(1, 1.2, 0.5, 0.6, 0.0,0,1),
-                TrainingData(2, 1.4, 0.6, 0.5,0.0,0,1)
+                TrainingData(1, 1.2F, 0.5F, 0.6F, 0.0F,0,1),
+                TrainingData(2, 1.4F, 0.6F, 0.5F,0.0F,0,1)
             ),
             2L to listOf(
-                TrainingData(1, 3.5, 2.1, 2.4,0.0,0,2),
-                TrainingData(2, 4.0, 2.3, 2.4,0.0,0,2)
+                TrainingData(1, 3.5F, 2.1F, 2.4F,0.0F,0,2),
+                TrainingData(2, 4.0F, 2.3F, 2.4F,0.0F,0,2)
             )
         )
 
@@ -95,12 +95,12 @@ class DataComparerTest {
         val activityData = listOf(1L to "Walking", 2L to "Running")
         val trainingData = mapOf(
             1L to listOf(
-                TrainingData(1, 1.2, 0.5, 0.6, 0.0,0,1),
-                TrainingData(2, 1.4, 0.6, 0.5,0.0,0,1)
+                TrainingData(1, 1.2F, 0.5F, 0.6F, 0.0F,0,1),
+                TrainingData(2, 1.4F, 0.6F, 0.5F,0.0F,0,1)
             ),
             2L to listOf(
-                TrainingData(1, 3.5, 2.1, 2.4,0.0,0,2),
-                TrainingData(2, 4.0, 2.3, 2.4,0.0,0,2)
+                TrainingData(1, 3.5F, 2.1F, 2.4F,0.0F,0,2),
+                TrainingData(2, 4.0F, 2.3F, 2.4F,0.0F,0,2)
             )
         )
 

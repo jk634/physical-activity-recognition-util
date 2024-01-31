@@ -15,10 +15,10 @@ package fi.juka.library.database
  */
 class TrainingData(
     val id: Long,
-    val x_axis: Double,
-    val y_axis: Double,
-    val z_axis: Double,
-    val total_acceleration: Double,
+    val x_axis: Float,
+    val y_axis: Float,
+    val z_axis: Float,
+    val total_acceleration: Float,
     val timestamp: Long,
     val activityId: Long) {
 }

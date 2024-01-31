@@ -33,9 +33,9 @@ class DataComparer(private val context: Context) {
 
             if (samples.isNotEmpty()) {
                 val averageTotalAcc = AccelerationUtils.calculateAverageTotalAcceleration(
-                    samples.map { it.x_axis },
-                    samples.map { it.y_axis },
-                    samples.map { it.z_axis })
+                    samples.map { it.x_axis.toDouble() },
+                    samples.map { it.y_axis.toDouble() },
+                    samples.map { it.z_axis.toDouble() })
 
                 activityAverageTotalAccList.add(Triple(activityId, activityName, averageTotalAcc))
             }
@@ -44,7 +44,7 @@ class DataComparer(private val context: Context) {
                 val maxAverage = activityAverageTotalAccList.maxByOrNull { it.third }!!.third
                 val minAverage = activityAverageTotalAccList.minByOrNull { it.third }!!.third
 
-                threshold = (maxAverage - minAverage) / activityAverageTotalAccList.size
+                threshold = ((maxAverage - minAverage) / activityAverageTotalAccList.size).toDouble()
             }
         }
     }
