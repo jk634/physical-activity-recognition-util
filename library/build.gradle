@@ -58,6 +58,21 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 }
 
+afterEvaluate{
+    publishing{
+        publications{
+            release(MavenPublication){
+                from components.release
+
+                groupId='com.github.jk634'
+                artifactId = 'physical-activity-recognition-util'
+                version = '1.0.1'
+            }
+        }
+    }
+}
+
+
 // Only for local publishing
 /*
 afterEvaluate {
