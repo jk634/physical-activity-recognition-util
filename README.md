@@ -1,37 +1,39 @@
 # Activity Recognition Library
-This library provides Android developers with tools to recognize user activities using sensor data.
+This library provides Android developers with tools to recognize different physical activities using the accelerometer sensor data. 
 
-## Features
+The library includes features such as:
 
-- __Activity Recognition:__ Recognize physical activities performed by the user.
+- __Activity Recognition:__ Recognizes user's physical activities in real-time.
 - __Utilization of Accelerometer:__ Utilize the smartphone’s accelerometer for accurate activity detection.
-- __Real-time Recognition:__ Provide immediate feedback on user activities in real-time.
 - __Flexible Integration:__ Easily integrate into Android projects.
-- __User-Friendly Interface:__  Offers a clear interface and comprehensive documentation for easy adoption.
+- __Clear Documentation:__ Provides comprehensive documentation.
+
+## Documentation
+
+Documentation is available at https://jk634.github.io/physical-activity-recognition-util/ .
 
 ## Installation
 
-Add the library dependency to your `build.gradle` file:
+Make sure to include maven `url 'https://jitpack.io'` in your root build.gradle file, to ensure the library can be fetched from JitPack repository:
 
 ```kotlin
-implementation 'fi.juka:activity-recognition-library:1.0.0'
-```
-
-Make sure to include maven  `url 'https://jitpack.io'` in your settings.gradle file:
-
-```kotlin
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+allprojects {
     repositories {
-        google()
-        mavenCentral()
+		...
         maven { url 'https://jitpack.io' }
     }
 }
 ```
+
+Add the following dependency to your module-level build.gradle file to integrate the library into your project:
+
+```kotlin
+implementation 'com.github.jk634:juka:physical-activity-recognition-util:1.0.0'
+```
+
 ## Usage Examples
 ### Accelerometer
-To utilize the accelerometer and gather activity data from it, you need to create an activity that implements the AccelerometerListener interface. For example:
+To utilize the accelerometer and gather activity data from it, you need to create an activity that implements the AccelerometerListener interface. Here's an example:
 
 ```kotlin
 class MainActivity : AppCompatActivity(), AccelerometerListener {
@@ -71,7 +73,7 @@ class MainActivity : AppCompatActivity(), AccelerometerListener {
     }
 }
 ```
-In this MainActivity class, the AccelerometerListener interface is implemented, allowing the reception of accelerometer data. In the onCreate() method, the accelerometer is initialized and the listener is registered. The onResume() and onPause() methods ensure that the listener is properly registered and unregistered during the activity's lifecycle, allowing you to handle new accelerometer data as needed. 
+Here, the AccelerometerListener interface is implemented, allowing the reception of accelerometer data. In the onCreate() method, the accelerometer is initialized and the listener is registered. The onResume() and onPause() methods ensure that the listener is properly registered and unregistered during the activity's lifecycle, allowing you to handle new accelerometer data as needed. 
 
 I recommend you to filter acceleration data using the filter method because it helps remove the effects of gravity from the raw accelerometer readings. By applying a low-pass filter with a smoothing factor (alpha), the filter function separates gravitational acceleration from the overall acceleration.
 
@@ -80,7 +82,7 @@ That's all for registering the accelerometer and getting data from it!
 ### Database
 
 It's up to you how you would like to save your acceleration data. The only requirement is that you must use the TrainingData class for successful data comparison. Here's how the TrainingData class looks like:
-```
+```kotlin
 class TrainingData(
     val id: Long,
     val x_axis: Float,
@@ -93,17 +95,18 @@ class TrainingData(
 }
 ```
 Where
-__id__ represents a unique identifier for each acceleration data,
-__x_axis__, __y_axis__, and __z_axis__ indicate the acceleration values along the respective axes,
-__total_acceleration__ denotes the overall acceleration value,
-__timestamp__ signifies the time when the acceleration data is recorded, and
-__activityId__ associates with the activity represented by the acceleration data.
+- __id__ represents a unique identifier for each acceleration data
+- __x_axis__, __y_axis__, and __z_axis__ indicate the acceleration values along the respective axes
+- __total_acceleration__ denotes the overall acceleration value, which you can calculate using the formula: sqrt(x_axis^2 + y_axis^2 + z_axis^2)
+- __timestamp__ signifies the time when the acceleration data is recorded
+- __activityId__ associates with the activity represented by the acceleration data
 
-I have a database package ready for use, and you can utilize it along with its methods as per your preference. You can find the documentation here.
+I have a database package ready for use, and you can utilize it along with its methods as per your preference. You can find the database documentation [here](https://jk634.github.io/physical-activity-recognition-util/library/fi.juka.library.database/index.html).
 
 ### Data comparision
 
-DataComparer class preprocesses the activity data before comparison. Then, it compares real-time average accelerations to preprocessed training data to identify the user's performed activity. For example: 
+DataComparer class preprocesses the activity data before comparison. Then, it compares real-time average accelerations to preprocessed training data to identify the user's performed activity. 
+For example: 
 
 ```kotlin
 class MainActivity : AppCompatActivity() {
@@ -153,8 +156,11 @@ class MainActivity : AppCompatActivity() {
 ```
 Here, example data is created from training data for different activities such as walking, cycling, and running. This training data is passed to the DataComparer class.
 
-[!NOTE]
-data comparer currently doesn't require total acceleration or timestamp, so you can set them as 0 for now
+> [!NOTE]  
+> Data comparer currently doesn't require total acceleration or timestamp, so you can set them as 0.0F and 0 for now.
+
+> [!IMPORTANT]
+> You need to use the preprocessing function on the list of activities and the training data list before you can use the compareDataAverages function to obtain the threshold and the average total accelerations of the activities.
 
 As you can see from the example, in data comparison, it is necessary to compare the average total accelerations of real-time acceleration values with previously stored acceleration data to use the comparison. You can use the AccelerationDataBuffer class to assist with this. You can either use it by buffering data with a predetermined buffer size:
 
