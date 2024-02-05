@@ -17,19 +17,21 @@ Documentation is available at https://jk634.github.io/physical-activity-recognit
 Make sure to include maven `url 'https://jitpack.io'` in your root build.gradle file, to ensure the library can be fetched from JitPack repository:
 
 ```kotlin
-allprojects {
-    repositories {
-		...
-        maven { url 'https://jitpack.io' }
-    }
+dependencyResolutionManagement {
+	repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+	repositories {
+		mavenCentral()
+		maven { url 'https://jitpack.io' }
+	}
 }
 ```
 
 Add the following dependency to your module-level build.gradle file to integrate the library into your project:
 
 ```kotlin
-implementation 'com.github.jk634:juka:physical-activity-recognition-util:1.0.1'
+implementation 'com.github.jk634:physical-activity-recognition-util:1.0.1'
 ```
+
 
 ## Usage Examples
 ### Accelerometer
