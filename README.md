@@ -28,7 +28,7 @@ allprojects {
 Add the following dependency to your module-level build.gradle file to integrate the library into your project:
 
 ```kotlin
-implementation 'com.github.jk634:juka:physical-activity-recognition-util:1.0.0'
+implementation 'com.github.jk634:juka:physical-activity-recognition-util:1.0.1'
 ```
 
 ## Usage Examples
