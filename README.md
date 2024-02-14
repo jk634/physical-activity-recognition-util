@@ -28,7 +28,7 @@ allprojects {
 Add the following dependency to your module-level build.gradle file to integrate the library into your project:
 
 ```kotlin
-implementation 'com.github.jk634:juka:physical-activity-recognition-util:1.0.1'
+implementation 'com.github.jk634:juka:physical-activity-recognition-util:1.1.0'
 ```
 
 ## Usage Examples
@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity(), AccelerometerListener {
 ```
 Here, the AccelerometerListener interface is implemented, allowing the reception of accelerometer data. In the onCreate() method, the accelerometer is initialized and the listener is registered. The onResume() and onPause() methods ensure that the listener is properly registered and unregistered during the activity's lifecycle, allowing you to handle new accelerometer data as needed. 
 
-I recommend you to filter acceleration data using the filter method because it helps remove the effects of gravity from the raw accelerometer readings. By applying a low-pass filter with a smoothing factor (alpha), the filter function separates gravitational acceleration from the overall acceleration.
+I recommend you to filter acceleration data using the filter method because it helps remove the effects of gravity from the raw accelerometer readings. By applying a low-pass filter with a smoothing factor (alpha), the filter function separates gravitational acceleration from the overall acceleration. You have the option to specify your own alpha value along with the accelerometer data. The default value is set to 0.95f.
 
 That's all for registering the accelerometer and getting data from it!
 
@@ -105,7 +105,7 @@ I have a database package ready for use, and you can utilize it along with its m
 
 ### Data comparision
 
-DataComparer class preprocesses the activity data before comparison. Then, it compares real-time average accelerations to preprocessed training data to identify the user's performed activity. 
+DataCompare class preprocesses the activity data before comparison. Then, it compares real-time average accelerations to preprocessed training data to identify the user's performed activity. 
 For example: 
 
 ```kotlin
@@ -132,10 +132,10 @@ class MainActivity : AppCompatActivity() {
         )
 
         // Context initialization
-        val dataComparer = DataComparer(this)
+        val dataCompare = DataCompare(this)
 
         // Preprocessing the activity data
-        dataComparer.preprocessing(
+        dataCompare.preprocessing(
             listOf(
                 Pair(1L, "Walking"),
                 Pair(2L, "Cycling"),
@@ -148,13 +148,13 @@ class MainActivity : AppCompatActivity() {
         val realTimeTotAvrgAcc = 1.47
 
         // Comparing real-time total average acceleration with preprocessed activity data
-        dataComparer.compareDataAverages(realTimeTotAvrgAcc) { recognizedActivity ->
+        dataCompare.compareDataAverages(realTimeTotAvrgAcc) { recognizedActivity ->
             Log.d("Activity test", "Recognized Activity: $recognizedActivity")
         }
     }
 }
 ```
-Here, example data is created from training data for different activities such as walking, cycling, and running. This training data is passed to the DataComparer class.
+Here, example data is created from training data for different activities such as walking, cycling, and running. This training data is passed to the DataCompare class.
 
 > [!NOTE]  
 > Data comparer currently doesn't require total acceleration or timestamp, so you can set them as 0.0F and 0 for now.
@@ -165,12 +165,12 @@ Here, example data is created from training data for different activities such a
 As you can see from the example, in data comparison, it is necessary to compare the average total accelerations of real-time acceleration values with previously stored acceleration data to use the comparison. You can use the AccelerationDataBuffer class to assist with this. You can either use it by buffering data with a predetermined buffer size:
 
 ```kotlin
-AccelerationDataBuffer(bufferSize = 20)
+AccelerationDataBuffer(bufferSize = 40)
 ```
 Or use it for temporarily storing and removing data, as shown in the following example:
 ```kotlin
 override fun onAccelerationChanged(acceleration: FloatArray) {
-    var accData = accelerometer.filter(acceleration)
+    var accData = accelerometer.filter(acceleration, 0.8f)
 
     accelerationBuffer.addData(
         Triple(accData[0].toDouble(), accData[1].toDouble(), accData[2].toDouble()),
@@ -179,7 +179,7 @@ override fun onAccelerationChanged(acceleration: FloatArray) {
         
     val currentData = accelerationBuffer.getData()
     
-    if (currentData.size == 20) {
+    if (currentData.size == 40) {
         val x = currentData.map { it.first.first }
         val y = currentData.map { it.first.second }
         val z = currentData.map { it.first.third }
@@ -194,6 +194,28 @@ override fun onAccelerationChanged(acceleration: FloatArray) {
             }
         }
         accelerationBuffer.emptyData()
+    }
+}
+```
+Or you can employ a simplified approach, such as:
+```kotlin
+override fun onAccelerationChanged(acceleration: FloatArray) {
+    val accData = accelerometer.filter(acceleration, 0.7f)
+
+    currentData.add(floatArrayOf(accData[0], accData[1], accData[2]))
+
+    if (currentData.size == 40) {
+        val x = currentData.map { it[0].toDouble() }
+        val y = currentData.map { it[1].toDouble() }
+        val z = currentData.map { it[2].toDouble() }
+
+        val avrgTotalAcc = AccelerationUtils.calculateAverageTotalAcceleration(x,y,z)
+
+        comparison.compareDataAverages(avrgTotalAcc) { activityName ->
+            val formattedSpeed = "%.3f".format(avrgTotalAcc)
+            currentActivity!!.text = "$activityName\n\ntotal acceleration\n$formattedSpeed"
+        }
+        currentData.clear()
     }
 }
 ```
