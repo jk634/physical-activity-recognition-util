@@ -8,11 +8,11 @@ import fi.juka.library.database.TrainingData
  * It preprocesses the activity data and compares real-time total average acceleration with preprocessed data.
  *
  * @property context The context needed for initialization.
- * @property activityAverageTotalAccList A list to store activity, its ID, and its average total acceleration.
+ * @property activityAverageTotalAccList A list to store activity name, its ID, and its average total acceleration.
  * @property threshold The threshold used for activity comparison based on acceleration averages.
  * @property stillThreshold The threshold for considering the device as 'still'.
  */
-class DataComparer(private val context: Context) {
+class DataCompare(private val context: Context) {
 
     val activityAverageTotalAccList  = mutableListOf<Triple<Long, String, Double>>()
     private var threshold = 0.0
@@ -60,15 +60,24 @@ class DataComparer(private val context: Context) {
 
         // if staying still
         if (realTimeTotAvrgAcc < stillThreshold) {
-            onActivityRecognized("Still")
+            onActivityRecognized("still")
             return
         }
 
-        val currentActivity = activityAverageTotalAccList.find { it.third - threshold <= realTimeTotAvrgAcc
-                && realTimeTotAvrgAcc <= it.third + threshold }
+        val candidates = activityAverageTotalAccList.filter {
+            it.third - threshold <= realTimeTotAvrgAcc && realTimeTotAvrgAcc <= it.third +
+                    threshold
+        }
 
-        currentActivity?.let {
-            onActivityRecognized(it.second)
+        when {
+            candidates.size == 1 -> onActivityRecognized(candidates.first().second)
+            candidates.size > 1 -> {
+                val closestActivity = candidates.minByOrNull { Math.abs(it.third - realTimeTotAvrgAcc) }
+                closestActivity?.let {
+                    onActivityRecognized(it.second)
+                }
+            }
+            else -> onActivityRecognized("")
         }
     }
 }
