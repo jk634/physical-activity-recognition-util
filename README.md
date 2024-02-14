@@ -17,11 +17,12 @@ Documentation is available at https://jk634.github.io/physical-activity-recognit
 Make sure to include maven `url 'https://jitpack.io'` in your root build.gradle file, to ensure the library can be fetched from JitPack repository:
 
 ```kotlin
-allprojects {
-    repositories {
-		...
-        maven { url 'https://jitpack.io' }
-    }
+dependencyResolutionManagement {
+	repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+	repositories {
+		mavenCentral()
+		maven { url 'https://jitpack.io' }
+	}
 }
 ```
 
