@@ -58,18 +58,18 @@ $dokka.location:fi.juka.library/AccelerationUtils///PointingToDeclaration/libra
 $dokka.location:fi.juka.library/AccelerationUtils/AccelerationUtils/#/PointingToDeclaration/library/fi.juka.library/-acceleration-utils/-acceleration-utils.html
 $dokka.location:fi.juka.library/Accelerometer///PointingToDeclaration/library/fi.juka.library/-accelerometer/index.html
 $dokka.location:fi.juka.library/Accelerometer/Accelerometer/#android.content.Context/PointingToDeclaration/library/fi.juka.library/-accelerometer/-accelerometer.html
-$dokka.location:fi.juka.library/Accelerometer/filter/#kotlin.FloatArray/PointingToDeclaration/library/fi.juka.library/-accelerometer/filter.html
+$dokka.location:fi.juka.library/Accelerometer/filter/#kotlin.FloatArray#kotlin.Float/PointingToDeclaration/library/fi.juka.library/-accelerometer/filter.html
 $dokka.location:fi.juka.library/Accelerometer/onAccuracyChanged/#android.hardware.Sensor?#kotlin.Int/PointingToDeclaration/library/fi.juka.library/-accelerometer/on-accuracy-changed.html
 $dokka.location:fi.juka.library/Accelerometer/onSensorChanged/#android.hardware.SensorEvent?/PointingToDeclaration/library/fi.juka.library/-accelerometer/on-sensor-changed.html
 $dokka.location:fi.juka.library/Accelerometer/register/#fi.juka.library.AccelerometerListener/PointingToDeclaration/library/fi.juka.library/-accelerometer/register.html
 $dokka.location:fi.juka.library/Accelerometer/unregister/#/PointingToDeclaration/library/fi.juka.library/-accelerometer/unregister.html
 $dokka.location:fi.juka.library/AccelerometerListener///PointingToDeclaration/library/fi.juka.library/-accelerometer-listener/index.html
 $dokka.location:fi.juka.library/AccelerometerListener/onAccelerationChanged/#kotlin.FloatArray/PointingToDeclaration/library/fi.juka.library/-accelerometer-listener/on-acceleration-changed.html
-$dokka.location:fi.juka.library/DataComparer///PointingToDeclaration/library/fi.juka.library/-data-comparer/index.html
-$dokka.location:fi.juka.library/DataComparer/DataComparer/#android.content.Context/PointingToDeclaration/library/fi.juka.library/-data-comparer/-data-comparer.html
-$dokka.location:fi.juka.library/DataComparer/activityAverageTotalAccList/#/PointingToDeclaration/library/fi.juka.library/-data-comparer/activity-average-total-acc-list.html
-$dokka.location:fi.juka.library/DataComparer/compareDataAverages/#kotlin.Double#kotlin.Function1[kotlin.String,kotlin.Unit]/PointingToDeclaration/library/fi.juka.library/-data-comparer/compare-data-averages.html
-$dokka.location:fi.juka.library/DataComparer/preprocessing/#kotlin.collections.List[kotlin.Pair[kotlin.Long,kotlin.String]]#kotlin.collections.Map[kotlin.Long,kotlin.collections.List[fi.juka.library.database.TrainingData]]/PointingToDeclaration/library/fi.juka.library/-data-comparer/preprocessing.html
+$dokka.location:fi.juka.library/DataCompare///PointingToDeclaration/library/fi.juka.library/-data-compare/index.html
+$dokka.location:fi.juka.library/DataCompare/DataCompare/#android.content.Context/PointingToDeclaration/library/fi.juka.library/-data-compare/-data-compare.html
+$dokka.location:fi.juka.library/DataCompare/activityAverageTotalAccList/#/PointingToDeclaration/library/fi.juka.library/-data-compare/activity-average-total-acc-list.html
+$dokka.location:fi.juka.library/DataCompare/compareDataAverages/#kotlin.Double#kotlin.Function1[kotlin.String,kotlin.Unit]/PointingToDeclaration/library/fi.juka.library/-data-compare/compare-data-averages.html
+$dokka.location:fi.juka.library/DataCompare/preprocessing/#kotlin.collections.List[kotlin.Pair[kotlin.Long,kotlin.String]]#kotlin.collections.Map[kotlin.Long,kotlin.collections.List[fi.juka.library.database.TrainingData]]/PointingToDeclaration/library/fi.juka.library/-data-compare/preprocessing.html
 fi.juka.library
 fi.juka.library.database
 
