@@ -8,17 +8,17 @@ import org.junit.Test
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
-class DataComparerTest {
+class DataCompareTest {
 
     @Mock
     lateinit var mockedContext: Context
 
-    private lateinit var dataComparer: DataComparer
+    private lateinit var dataCompare: DataCompare
 
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        dataComparer = DataComparer(mockedContext)
+        dataCompare = DataCompare(mockedContext)
     }
 
     @Test
@@ -26,9 +26,9 @@ class DataComparerTest {
         val activityData = listOf(1L to "Activity1", 2L to "Activity2")
         val trainingData = emptyMap<Long, List<TrainingData>>()
 
-        dataComparer.preprocessing(activityData, trainingData)
+        dataCompare.preprocessing(activityData, trainingData)
 
-        assertEquals(0, dataComparer.activityAverageTotalAccList.size)
+        assertEquals(0, dataCompare.activityAverageTotalAccList.size)
     }
 
     @Test
@@ -45,9 +45,9 @@ class DataComparerTest {
             )
         )
 
-        dataComparer.preprocessing(activityData, trainingData)
+        dataCompare.preprocessing(activityData, trainingData)
 
-        assertEquals(2, dataComparer.activityAverageTotalAccList.size)
+        assertEquals(2, dataCompare.activityAverageTotalAccList.size)
     }
 
     @Test
@@ -55,7 +55,7 @@ class DataComparerTest {
         val realTimeTotAvrgAcc = 0.05
         var recognizedActivity = ""
 
-        dataComparer.compareDataAverages(realTimeTotAvrgAcc) { activity ->
+        dataCompare.compareDataAverages(realTimeTotAvrgAcc) { activity ->
             recognizedActivity = activity
         }
 
@@ -77,12 +77,12 @@ class DataComparerTest {
             )
         )
 
-        dataComparer.preprocessing(activityData, trainingData)
+        dataCompare.preprocessing(activityData, trainingData)
 
         val realTimeTotAvrgAcc = 3.0
         var recognizedActivity = ""
 
-        dataComparer.compareDataAverages(realTimeTotAvrgAcc) { activity ->
+        dataCompare.compareDataAverages(realTimeTotAvrgAcc) { activity ->
             recognizedActivity = activity
         }
 
@@ -104,11 +104,11 @@ class DataComparerTest {
             )
         )
 
-        dataComparer.preprocessing(activityData, trainingData)
+        dataCompare.preprocessing(activityData, trainingData)
 
         val realTimeTotAvrgAcc = 8.0
         var recognizedActivity = ""
-        dataComparer.compareDataAverages(realTimeTotAvrgAcc) { activity ->
+        dataCompare.compareDataAverages(realTimeTotAvrgAcc) { activity ->
             recognizedActivity = activity
         }
 
