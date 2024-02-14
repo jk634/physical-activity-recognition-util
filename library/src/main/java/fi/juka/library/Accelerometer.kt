@@ -56,13 +56,13 @@ class Accelerometer(context: Context) : SensorEventListener {
     }
 
     /**
-     * Filters the accelerometer data using a low-pass filter.
+     * Filters accelerometer data to remove gravitational noise and isolate the device's true motion.
      *
      * @param acceleration the raw accelerometer data to be filtered
+     * @param alpha the smoothing factor for the low-pass filter, defaults to 0.95
      * @return the filtered accelerometer data
      */
-    fun filter(acceleration: FloatArray): FloatArray {
-        val alpha: Float = 0.8f
+    fun filter(acceleration: FloatArray, alpha: Float = 0.95f): FloatArray {
 
         gravity[0] = alpha * gravity[0] + (1 - alpha) * acceleration[0]
         gravity[1] = alpha * gravity[1] + (1 - alpha) * acceleration[1]
